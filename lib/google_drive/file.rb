@@ -70,6 +70,10 @@ module GoogleDrive
           return document_feed_entry(params).css("title").text
         end
         
+        def last_modified_by()
+          return "#{self.document_feed_entry.css('gd|lastModifiedBy name').text} #{self.document_feed_entry.css('gd|lastModifiedBy email').text}"
+        end
+        
         # URL to view/edit the file in a Web browser.
         #
         # e.g. "https://docs.google.com/file/d/xxxx/edit"
