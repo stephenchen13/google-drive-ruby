@@ -63,6 +63,13 @@ module GoogleDrive
           return self.resource_id.split(/:/)[0]
         end
 
+        # Author of the file.
+        #
+        # Format: "name email" e.g. "Dan dan@gmail.com"
+        def author
+          return "#{self.document_feed_entry.css('author name').text} #{self.document_feed_entry.css('author email').text}"
+        end
+        
         # Title of the file.
         #
         # Set <tt>params[:reload]</tt> to true to force reloading the title.
@@ -70,6 +77,9 @@ module GoogleDrive
           return document_feed_entry(params).css("title").text
         end
         
+        # Last modified by
+        # 
+        # Format: "name email" e.g. "Dan dan@gmail.com"
         def last_modified_by
           return "#{self.document_feed_entry.css('gd|lastModifiedBy name').text} #{self.document_feed_entry.css('gd|lastModifiedBy email').text}"
         end
